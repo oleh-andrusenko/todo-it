@@ -2,32 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+header {
+  @apply bg-white;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+header,
+main {
+  @apply px-2 lg:px-36;
+}
+main {
+  @apply py-4;
+}
+#tasklist {
+  scrollbar-width: none;
+}
+textarea {
+  resize: none;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.input-field {
+  position: relative;
+  transition: all 0.3s ease;
+}
+.input-field input {
+  background: transparent;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.input-field label {
+  position: absolute;
+  top: -1.1rem;
+  left: 0.25rem;
+  background: #fff;
+  padding: 0 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.input-field input:focus ~ label {
+  @apply text-blue-700;
+}
+
+.input-field input:invalid
+ {
+  border-color: red;
+}
+.input-field input:invalid ~ label{
+  color: red;
 }
