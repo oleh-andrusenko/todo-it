@@ -3,16 +3,19 @@ import Link from "next/link"
 import Logo from "./Logo"
 import UserInfo from "./UserInfo"
 import { useSession } from "next-auth/react"
+import ThemeSwitcher from "./ThemeSwitcher"
 function Header() {
   const session = useSession()
   console.log(session)
   return (
-    <header className='h-16  flex items-center  justify-between shadow-lg sticky top-0 z-10'>
+    <header className='h-16  flex items-center  justify-between shadow-lg sticky top-0 z-10 dark:bg-black dark:border-1 dark:border-b-[1px] dark:border-blue-700'>
       <Logo />
-
-      {session.status === "authenticated" && (
-        <UserInfo user={session?.data?.user} />
-      )}
+      <div className="flex gap-4">
+        <ThemeSwitcher />
+        {session.status === "authenticated" && (
+          <UserInfo user={session?.data?.user} />
+        )}
+      </div>
     </header>
   )
 }

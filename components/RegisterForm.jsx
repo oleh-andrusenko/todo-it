@@ -41,12 +41,12 @@ function RegisterForm() {
   }
 
   return (
-    <div className='w-full md:w-[600px] p-4 md:p-6 flex flex-col items-center bg-white'>
+    <div className='w-full md:w-[600px] p-4 md:p-6 flex flex-col items-center '>
       <div className='text-center'>
-        <h2 className='font-bold text-3xl'>
+        <h2 className='font-bold text-3xl dark:text-white'>
           Welcome to ToDo<span className='text-blue-700'>.it</span>
         </h2>
-        <p className='text-slate-600 mt-1 mb-4 md:my-2'>
+        <p className='text-slate-600 mt-1 mb-4 md:my-2 dark:text-slate-400'>
           Create your account to use our app.
         </p>
       </div>
@@ -142,7 +142,7 @@ function RegisterForm() {
           <div className='w-full flex items-center gap-4 justify-end mt-6'>
             <Link
               href='/login'
-              className='text-sm text-slate-700 underline hover:text-slate-900 transition-all'
+              className='text-sm text-slate-700 underline hover:text-blue-700 transition-all dark:text-slate-300'
             >
               Already have account? Sign in
             </Link>

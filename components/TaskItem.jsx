@@ -59,8 +59,8 @@ function TaskItem({ task }) {
 
   return (
     <motion.div
-      className={`min-w-[300px] h-[200px]  border-[1px] p-4 rounded-xl flex flex-col relative ${
-        task.isDone ? "border-green-300 border-[2px]" : undefined
+      className={`min-w-[300px] h-[200px]  border-[1px] shadow-lg p-4 rounded-xl flex flex-col relative dark:bg-slate-800 dark:border-0 ${
+        task.isDone ? "border-green-300 border-[2px] dark:border-green-300 dark:border-2" : undefined
       }`}
       initial={{
         opacity: 0,
@@ -80,7 +80,7 @@ function TaskItem({ task }) {
           onChange={toggleDone}
         />
         <p
-          className={`font-bold text-lg max-w-[16ch] min-w-[16ch] truncate ... ${
+          className={`font-bold text-lg max-w-[16ch] min-w-[16ch] dark:text-white truncate ... ${
             task.isDone ? " line-through" : undefined
           }`}
         >
@@ -89,7 +89,7 @@ function TaskItem({ task }) {
       </div>
       <div className=''>
         <TaskDate dueDate={task.dueDate} />
-        <p className='text-sm text-slate-600 py-4 truncate ...'>
+        <p className='text-sm text-slate-600 py-4 truncate ... dark:text-slate-400'>
           {task.description}
         </p>
       </div>
@@ -107,7 +107,7 @@ function TaskItem({ task }) {
           className=' hover:cursor-pointer hover:scale-105  text-amber-700'
           onClick={() => router.push(`tasks/${task._id}`)}
         >
-          <MdEdit className='w-6 h-6' />
+          <MdEdit className='w-6 h-6 dark:text-blue-700' />
         </button>
         <button
           className=' hover:cursor-pointer hover:scale-105 text-red-700'

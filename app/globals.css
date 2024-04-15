@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+  @apply dark:bg-slate-950;
+}
 header {
   @apply bg-white;
 }
@@ -33,19 +36,14 @@ textarea {
   left: 0.25rem;
   background: #fff;
   padding: 0 0.25rem;
-  transition: all 0.3s ease;
+  @apply dark:bg-slate-950 dark:text-white;
+
 }
 
 .input-field input:focus ~ label {
   @apply text-blue-700;
 }
 
-.input-field input:invalid {
-  border-color: red;
-}
-.input-field input:invalid ~ label {
-  color: red;
-}
 
 button:disabled {
   @apply bg-slate-400 text-white border-slate-400;
@@ -54,4 +52,18 @@ button:disabled {
 button:disabled:hover {
   @apply bg-slate-400 text-white border-slate-400;
   cursor: not-allowed;
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  @apply border-2 border-blue-700 bg-white dark:bg-slate-950;
+  transition: background-color 5000s ease-in-out 0s;
 }

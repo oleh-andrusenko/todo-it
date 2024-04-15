@@ -64,8 +64,8 @@ function TaskForm({ task }) {
   }
 
   return (
-    <div className='p-6'>
-      <p className='text-2xl font-bold mb-12 px-4'>
+    <div className='p-6 dark:text-white'>
+      <p className='text-2xl font-bold mb-12 px-4 dark:text-white'>
         {task ? "Edit the " : "Add new "}item
       </p>
       <form

@@ -31,12 +31,12 @@ function AuthForm() {
   }
 
   return (
-    <div className='w-full md:w-[600px] px-4 py-10 md:p-6 flex flex-col items-center bg-white'>
+    <div className='w-full md:w-[600px] px-4 py-10 md:p-6 flex flex-col items-center '>
       <div className='text-center'>
-        <h2 className='font-bold text-3xl md:text-2xl'>
+        <h2 className='font-bold text-3xl md:text-2xl dark:text-white'>
           Welcome to ToDo<span className='text-blue-700'>.it</span>
         </h2>
-        <p className='text-slate-600 mt-2'>
+        <p className='text-slate-600 mt-2 dark:text-slate-400'>
           Login into your account to see your tasks.
         </p>
       </div>
@@ -90,7 +90,7 @@ function AuthForm() {
           <div className='w-full flex items-center gap-4 justify-end mt-6'>
             <Link
               href='/register'
-              className='text-sm text-slate-700 underline hover:text-slate-900 transition-all'
+              className='text-sm text-slate-700 underline hover:text-blue-700 transition-all dark:text-slate-300'
             >
               New user? Sign up
             </Link>

@@ -5,7 +5,7 @@ function PriorityPicker({ priority, setPriority }) {
     <div className='w-full border-2 border-slate-500 relative rounded-lg h-10 p-2 mb-4'>
       <label
         htmlFor='priority'
-        className='font-semibold absolute -top-4 left-2 bg-white'
+        className='font-semibold absolute -top-4 left-2 bg-white dark:bg-slate-950 px-1'
       >
         Priority
       </label>
