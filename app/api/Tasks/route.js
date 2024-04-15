@@ -16,7 +16,9 @@ export async function POST(req) {
 export async function GET(req) {
   try {
     const userEmail = req.nextUrl.searchParams.get("email")
-    const tasks = await Task.find({ user: userEmail })
+    const tasks = await Task.find({ user: userEmail }).sort({
+      priority: 1,
+    })
     return NextResponse.json({ tasks }, { status: 200 })
   } catch (error) {
     return NextResponse.json({ message: "Error", error }, { status: 500 })

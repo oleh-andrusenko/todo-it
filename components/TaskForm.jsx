@@ -2,26 +2,32 @@
 import { useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
-import { FaFire } from "react-icons/fa"
+
+import { notify } from "@/libs/notify"
+import { useForm } from "react-hook-form"
+import PriorityPicker from "./PriorityPicker"
+import ValidationError from "./ValidationError"
 function TaskForm({ task }) {
-  const title = useRef()
   const [priority, setPriority] = useState(1)
-  const dueDate = useRef()
-  const description = useRef()
   const router = useRouter()
   const session = useSession()
-
   const userEmail = session?.data?.user?.email
 
-  async function handleAddTask(e) {
-    e.preventDefault()
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm({
+    mode: "onBlur",
+  })
+  async function onAddTask(data) {
     if (!task) {
       const newTask = {
         user: userEmail,
-        title: title.current.value,
-        description: description.current.value,
+        title: data.title,
+        description: data.description,
         priority: priority,
-        dueDate: dueDate.current.value,
+        dueDate: data.dueDate,
         isDone: false,
         isFavourite: false,
       }
@@ -31,16 +37,17 @@ function TaskForm({ task }) {
         headers: { "Content-Type": "application/json" },
       })
       if (res.status === 201) {
+        notify(1, "Task created!")
         router.push("/")
         router.refresh()
-      } else alert("error")
+      } else notify(2, "Something went wrong!")
     } else {
       const updatedTask = {
         user: task.user,
-        title: title.current.value,
-        description: description.current.value,
+        title: data.title,
+        description: data.description,
         priority: priority,
-        dueDate: dueDate.current.value,
+        dueDate: data.dueDate,
         isDone: task.isDone,
         isFavourite: task.isFavourite,
       }
@@ -55,87 +62,72 @@ function TaskForm({ task }) {
       } else console.log(res)
     }
   }
-  
+
   return (
-    <div className='py-10 px-6'>
-      <p className='text-2xl font-bold mb-16'>
+    <div className='p-6'>
+      <p className='text-2xl font-bold mb-12 px-4'>
         {task ? "Edit the " : "Add new "}item
       </p>
       <form
-        className='flex flex-col gap-4'
-        method='post'
-        onSubmit={handleAddTask}
+        onSubmit={handleSubmit(onAddTask)}
+        className='w-screen px-4 md:w-[400px] flex flex-col gap-6'
       >
-        <div className='grid grid-rows-1 grid-cols-4 gap-4'>
-          <label htmlFor='title' className='col-span-1 font-semibold'>
+        <div className='input-field'>
+          <input
+            type='text'
+            maxLength={32}
+            {...register("title", {
+              required: "This field is required!",
+              minLength: {
+                value: 2,
+                message: "Min length of title is 2 characters!",
+              },
+              maxLength: {
+                value: 32,
+                message: "Max length of title is 32 characters!",
+              },
+            })}
+            defaultValue={task ? task.title : null}
+            className='w-full p-2 border-[2px] border-slate-500 rounded-md focus:border-[2px] focus:border-blue-700 focus:outline-none'
+          />
+          <label htmlFor='title' className='font-semibold'>
             Title
           </label>
+
+          <ValidationError>
+            {errors?.title && <p>{errors?.title?.message || "Error!"}</p>}
+          </ValidationError>
+        </div>
+
+        <PriorityPicker priority={priority} setPriority={setPriority} />
+
+        <div className='input-field mb-4'>
           <input
-            ref={title}
             type='text'
-            name='title'
-            required
+            {...register("description")}
             defaultValue={task ? task.title : null}
-            className='col-span-3 px-2 ml-2 border-[2px] border-slate-500 rounded-md focus:border-[2px] focus:border-blue-700 focus:outline-none'
+            className='w-full p-2 border-[2px] border-slate-500 rounded-md focus:border-[2px] focus:border-blue-700 focus:outline-none'
           />
-        </div>
-
-        <div className='grid grid-rows-1 grid-cols-4 gap-4'>
-          <label htmlFor='priority' className='col-span-1 font-semibold'>
-            Priority
-          </label>
-
-          <div
-            className={`flex items-center ${
-              priority === 1
-                ? "text-red-500"
-                : priority === 2
-                ? "text-amber-600"
-                : "text-green-600"
-            } text-center text-2xl font-semibold`}
-          >
-            <button onClick={() => setPriority(3)} type='button'>
-              <FaFire
-                className={`${priority > 3 ? "text-slate-400" : undefined}`}
-              />
-            </button>
-            <button onClick={() => setPriority(2)} type='button'>
-              <FaFire
-                className={`${priority > 2 ? "text-slate-400" : undefined}`}
-              />
-            </button>
-            <button onClick={() => setPriority(1)} type='button'>
-              <FaFire
-                className={`${priority > 1 ? "text-slate-400" : undefined}`}
-              />
-            </button>
-          </div>
-        </div>
-        <div className='grid grid-rows-1 grid-cols-4 gap-4'>
-          <label htmlFor='date' className='col-span-1 font-semibold'>
+          <label htmlFor='description' className='font-semibold'>
             Short description
           </label>
-          <textarea
-            name='date'
-            className='col-span-3 h-20 p-2 border-[2px] rounded-lg focus:border-blue-700 focus:outline-none'
-            ref={description}
-            defaultValue={task ? task.description : null}
-            required
-            maxLength={64}
-          />
+         
         </div>
-        <div className='grid grid-rows-1 grid-cols-4 gap-4'>
-          <label htmlFor='date' className='col-span-1 font-semibold'>
-            Due date
-          </label>
-          <input
-            type='date'
-            name='date'
-            className='col-span-3'
-            ref={dueDate}
-            defaultValue={task ? task.dueDate : null}
-            required
-          />
+        <div className='input-field '>
+          <div className='border-2 border-slate-500 p-2 rounded-lg'>
+            <input
+              type='date'
+              
+              defaultValue={task ? task.dueDate : null}
+              {...register("dueDate", { required: "This field is required!" })}
+            />
+            <label htmlFor='dueDate' className='font-semibold'>
+              Due date
+            </label>
+          </div>
+          <ValidationError>
+            {errors?.dueDate && <p>{errors?.dueDate?.message || "Error!"}</p>}
+          </ValidationError>
         </div>
 
         <div className='grid grid-rows-1 grid-cols-2 gap-4 mt-10'>
@@ -149,8 +141,8 @@ function TaskForm({ task }) {
             Cancel
           </button>
           <button
-            onClick={handleAddTask}
             type='submit'
+            disabled={!isValid}
             className='px-2 py-1 bg-blue-700 text-white rounded-lg hover:font-semibold transition-all'
           >
             Save

@@ -1,6 +1,9 @@
-"use client"
 import AuthForm from "../../components/AuthForm"
-
+export const metadata = {
+  icons: {
+    icon: "/logo.svg", // /public path
+  },
+}
 function LoginPage() {
   return (
     <div className='w-full h-full grid place-content-center'>

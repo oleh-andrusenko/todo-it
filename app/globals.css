@@ -6,12 +6,11 @@ header {
   @apply bg-white;
 }
 
-header,
-main {
-  @apply px-2 lg:px-36;
+header {
+  @apply px-2 md:px-36;
 }
 main {
-  @apply py-4;
+  @apply px-2 py-10 md:py-4 md:w-2/3 mx-auto ;
 }
 #tasklist {
   scrollbar-width: none;
@@ -41,10 +40,18 @@ textarea {
   @apply text-blue-700;
 }
 
-.input-field input:invalid
- {
+.input-field input:invalid {
   border-color: red;
 }
-.input-field input:invalid ~ label{
+.input-field input:invalid ~ label {
   color: red;
+}
+
+button:disabled {
+  @apply bg-slate-400 text-white border-slate-400;
+}
+
+button:disabled:hover {
+  @apply bg-slate-400 text-white border-slate-400;
+  cursor: not-allowed;
 }

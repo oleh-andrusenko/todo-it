@@ -6,19 +6,25 @@ import { MdEdit } from "react-icons/md"
 import TaskDate from "./TaskDate"
 import TaskPriority from "./TaskPriority"
 import { useRouter } from "next/navigation"
-
+import { notify } from "@/libs/notify"
+import { motion } from "framer-motion"
 function TaskItem({ task }) {
   const router = useRouter()
   const deleteTask = async () => {
-    try {
-      const res = await fetch(`http://localhost:3000/api/Tasks/${task._id}`, {
-        method: "DELETE",
-      })
-      if (res.ok) {
-        router.refresh()
+    const proceed = confirm("Are you sure to delete this task?")
+    if (proceed) {
+      try {
+        const res = await fetch(`http://localhost:3000/api/Tasks/${task._id}`, {
+          method: "DELETE",
+        })
+        if (res.ok) {
+          notify(1, "Task deleted!")
+          router.refresh()
+        }
+      } catch (error) {
+        console.error(error)
+        notify(2, error.toString())
       }
-    } catch (error) {
-      console.error(error)
     }
   }
   async function toggleDone() {
@@ -52,10 +58,19 @@ function TaskItem({ task }) {
   }
 
   return (
-    <div
+    <motion.div
       className={`min-w-[300px] h-[200px]  border-[1px] p-4 rounded-xl flex flex-col relative ${
         task.isDone ? "border-green-300 border-[2px]" : undefined
       }`}
+      initial={{
+        opacity: 0,
+        marginTop: -15,
+      }}
+      animate={{
+        opacity: 1,
+        marginTop: 0,
+      }}
+      transition={{ duration: .4 }}
     >
       <div className='flex gap-2 items-center py-2'>
         <input
@@ -65,7 +80,7 @@ function TaskItem({ task }) {
           onChange={toggleDone}
         />
         <p
-          className={`font-bold text-lg max-w-[16ch] min-w-[16ch] ${
+          className={`font-bold text-lg max-w-[16ch] min-w-[16ch] truncate ... ${
             task.isDone ? " line-through" : undefined
           }`}
         >
@@ -86,6 +101,7 @@ function TaskItem({ task }) {
         {task.isFavourite && <FaStar className='w-8 h-8' />}
       </button>
       <TaskPriority priority={+task.priority} />
+      <hr />
       <div className='absolute bottom-3 right-3 flex gap-3'>
         <button
           className=' hover:cursor-pointer hover:scale-105  text-amber-700'
@@ -100,7 +116,7 @@ function TaskItem({ task }) {
           <IoTrash className='w-6 h-6' />
         </button>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
