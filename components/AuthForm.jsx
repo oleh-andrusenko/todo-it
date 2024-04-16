@@ -53,7 +53,7 @@ function AuthForm() {
                     message: "Email address is not valid!",
                   },
                 })}
-                className='p-1 border-[2px] border-slate-500 rounded-md col-span-4 focus:border-[2px] focus:border-blue-700 focus:outline-none'
+                className='p-1 border-[2px] border-slate-500 rounded-md col-span-4 focus:border-[2px] focus:border-blue-700 focus:outline-none dark:text-white'
               />
               <label htmlFor='email' className='font-semibold'>
                 Email

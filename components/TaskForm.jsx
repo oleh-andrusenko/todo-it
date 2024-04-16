@@ -2,13 +2,15 @@
 import { useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
-
 import { notify } from "@/libs/notify"
 import { useForm } from "react-hook-form"
 import PriorityPicker from "./PriorityPicker"
 import ValidationError from "./ValidationError"
+import { FaCalendar } from "react-icons/fa";
+
 function TaskForm({ task }) {
   const [priority, setPriority] = useState(1)
+  const [date, setDate] = useState(new Date())
   const router = useRouter()
   const session = useSession()
   const userEmail = session?.data?.user?.email
@@ -111,16 +113,15 @@ function TaskForm({ task }) {
           <label htmlFor='description' className='font-semibold'>
             Short description
           </label>
-         
         </div>
-        <div className='input-field '>
-          <div className='border-2 border-slate-500 p-2 rounded-lg'>
+        <div className='input-field'>
+          <div className='border-2 border-slate-500 p-2 rounded-lg text-slate-900'>
             <input
-              type='date'
-              
-              defaultValue={task ? task.dueDate : null}
+              type='date'   
+              defaultValue={task ? task.dueDate : ""}
               {...register("dueDate", { required: "This field is required!" })}
             />
+
             <label htmlFor='dueDate' className='font-semibold'>
               Due date
             </label>

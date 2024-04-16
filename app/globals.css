@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+body {
   @apply dark:bg-slate-950;
 }
 header {
@@ -13,7 +13,7 @@ header {
   @apply px-2 md:px-36;
 }
 main {
-  @apply px-2 py-10 md:py-4 md:w-2/3 mx-auto ;
+  @apply px-2 py-10 md:py-4 md:w-2/3 mx-auto;
 }
 #tasklist {
   scrollbar-width: none;
@@ -27,7 +27,7 @@ textarea {
   transition: all 0.3s ease;
 }
 .input-field input {
-  background: transparent;
+  @apply bg-white dark:bg-slate-950 text-black;
 }
 
 .input-field label {
@@ -37,13 +37,11 @@ textarea {
   background: #fff;
   padding: 0 0.25rem;
   @apply dark:bg-slate-950 dark:text-white;
-
 }
 
 .input-field input:focus ~ label {
   @apply text-blue-700;
 }
-
 
 button:disabled {
   @apply bg-slate-400 text-white border-slate-400;
@@ -54,8 +52,11 @@ button:disabled:hover {
   cursor: not-allowed;
 }
 
+input[type="date"] {
+  @apply bg-slate-200 rounded-lg md:bg-transparent;
+}
 
-input:-webkit-autofill,
+/* input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
@@ -64,6 +65,6 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  @apply border-2 border-blue-700 bg-white dark:bg-slate-950;
+  @apply border-2 border-blue-700 bg-white  dark:text-white;
   transition: background-color 5000s ease-in-out 0s;
-}
+} */
