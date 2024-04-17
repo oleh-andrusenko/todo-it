@@ -2,7 +2,7 @@ import React from "react"
 import TaskForm from "../../../components/TaskForm"
 
 async function getTaskById(id) {
-  const res = await fetch("http://localhost:3000/api/Tasks/" + id, {
+  const res = await fetch("https://todo-it-eight.vercel.app/api/Tasks/" + id, {
     cache: "no-store",
   })
   if (!res.ok) {

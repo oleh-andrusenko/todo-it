@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import Image from "next/image"
-import { useRouter } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import { notify } from "@/libs/notify"
@@ -27,6 +27,7 @@ function AuthForm() {
     if (res.ok) {
       notify(1, "Successfully logged in!")
       router.push("/")
+      redirect("/")
     } else notify(2, "Something went wrong! Check credentials and try again!")
   }
 
@@ -103,7 +104,13 @@ function AuthForm() {
           </div>
         </form>
         <div className='flex items-center justify-center mt-16'>
-          <Image src={cat} alt='cat' width={300} height={300} className=' md:mt-4' />
+          <Image
+            src={cat}
+            alt='cat'
+            width={300}
+            height={300}
+            className=' md:mt-4'
+          />
         </div>
       </div>
     </div>
