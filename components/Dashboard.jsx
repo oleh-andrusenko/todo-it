@@ -9,7 +9,7 @@ const getTasks = async (currentUser) => {
   "use server"
   try {
     const res = await fetch(
-      `http://localhost:3000/api/Tasks?email=${currentUser}`,
+      `https://todo-it-eight.vercel.app/api/Tasks?email=${currentUser}`,
       {
         cache: "no-store",
       }

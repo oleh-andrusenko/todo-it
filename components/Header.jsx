@@ -1,5 +1,4 @@
 "use client"
-import Link from "next/link"
 import Logo from "./Logo"
 import UserInfo from "./UserInfo"
 import { useSession } from "next-auth/react"
