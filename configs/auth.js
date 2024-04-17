@@ -8,7 +8,7 @@ export const authConfig = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const response = await fetch("http://localhost:3000/api/Users/login", {
+        const response = await fetch("/api/Users/login", {
           method: "POST",
           body: JSON.stringify(credentials),
           headers: {
