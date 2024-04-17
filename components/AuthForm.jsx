@@ -103,7 +103,7 @@ function AuthForm() {
           </div>
         </form>
         <div className='flex items-center justify-center mt-16'>
-          <Image src={cat} width={300} height={300} className=' md:mt-4' />
+          <Image src={cat} alt='cat' width={300} height={300} className=' md:mt-4' />
         </div>
       </div>
     </div>

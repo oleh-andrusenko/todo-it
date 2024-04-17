@@ -155,7 +155,7 @@ function RegisterForm() {
           </div>
         </form>
         <div className='flex items-center justify-center mt-8'>
-          <Image src={dog} width={150} height={150} />
+          <Image src={dog} alt='dog' width={150} height={150} />
         </div>
       </div>
     </div>
