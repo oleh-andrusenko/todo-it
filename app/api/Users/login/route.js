@@ -5,7 +5,6 @@ import bcrypt from "bcrypt"
 export async function POST(req) {
   try {
     const body = await req.json()
-
     const { email, password } = body
     const findedUser = await User.findOne({ email: email })
 

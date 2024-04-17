@@ -27,7 +27,7 @@ textarea {
   transition: all 0.3s ease;
 }
 .input-field input {
-  @apply bg-white dark:bg-slate-950 text-black;
+  @apply bg-white dark:bg-slate-950 text-black dark:text-white;
 }
 
 .input-field label {
@@ -68,3 +68,7 @@ select:-webkit-autofill:focus {
   @apply border-2 border-blue-700 bg-white  dark:text-white;
   transition: background-color 5000s ease-in-out 0s;
 } */
+
+input {
+  @apply dark:text-white dark:bg-slate-950;
+}

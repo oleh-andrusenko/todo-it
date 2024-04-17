@@ -8,15 +8,17 @@ import TaskPriority from "./TaskPriority"
 import { useRouter } from "next/navigation"
 import { notify } from "@/libs/notify"
 import { motion } from "framer-motion"
+
 function TaskItem({ task }) {
   const router = useRouter()
   const deleteTask = async () => {
     const proceed = confirm("Are you sure to delete this task?")
     if (proceed) {
       try {
-        const res = await fetch(`http://localhost:3000/api/Tasks/${task._id}`, {
+        const res = await fetch(`/api/Tasks/${task._id}`, {
           method: "DELETE",
         })
+        console.log(res)
         if (res.ok) {
           notify(1, "Task deleted!")
           router.refresh()

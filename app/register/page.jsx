@@ -1,8 +1,9 @@
 import RegisterForm from "@/components/RegisterForm"
 import React from "react"
+
 export const metadata = {
   icons: {
-    icon: "/logo.svg", // /public path
+    icon: "/logo.svg", 
   },
 }
 function RegisterPage() {

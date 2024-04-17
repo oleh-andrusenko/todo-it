@@ -1,11 +1,10 @@
 import Task from "../../../(models)/Task"
 import { NextResponse } from "next/server"
-import { useSearchParams } from "next/navigation"
+
 export async function POST(req) {
   try {
     const body = await req.json()
     const taskData = body.formData
-
     await Task.create(taskData)
     return NextResponse.json({ message: "Task created" }, { status: 201 })
   } catch (error) {

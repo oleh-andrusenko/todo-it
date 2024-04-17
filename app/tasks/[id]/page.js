@@ -1,5 +1,6 @@
 import React from "react"
 import TaskForm from "../../../components/TaskForm"
+
 async function getTaskById(id) {
   const res = await fetch("http://localhost:3000/api/Tasks/" + id, {
     cache: "no-store",
@@ -9,6 +10,7 @@ async function getTaskById(id) {
   }
   return res.json()
 }
+
 async function TaskPage({ params }) {
   const { id } = params
   const { task } = await getTaskById(id)

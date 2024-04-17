@@ -4,11 +4,8 @@ import bcrypt from "bcrypt"
 
 export async function POST(req) {
   try {
-    console.log("USERS POST")
     const body = await req.json()
-    console.log("BODY", body)
     const userData = body.user
-    
     const findedUser = await User.findOne({ email: userData.email })
 
     if (findedUser) {
@@ -19,6 +16,7 @@ export async function POST(req) {
         { status: 300 }
       )
     }
+
     const hashedPassword = await bcrypt.hash(userData.password, 12)
     await User.create({ ...userData, password: hashedPassword })
     return NextResponse.json({ message: "User created" }, { status: 201 })
