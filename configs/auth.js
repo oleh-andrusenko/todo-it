@@ -13,6 +13,7 @@ export const authConfig = {
           body: JSON.stringify(credentials),
           headers: {
             "Content-Type": "application-json",
+            "Access-Control-Allow-Origin": "*",
           },
         })
         if (response.ok) {
