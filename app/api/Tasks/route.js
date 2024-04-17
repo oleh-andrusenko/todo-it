@@ -1,8 +1,10 @@
+import { connectToDb } from "@/libs/db"
 import Task from "../../../(models)/Task"
 import { NextResponse } from "next/server"
 
 export async function POST(req) {
   try {
+    await connectToDb()
     const body = await req.json()
     const taskData = body.formData
     await Task.create(taskData)
@@ -14,6 +16,7 @@ export async function POST(req) {
 
 export async function GET(req) {
   try {
+    await connectToDb()
     const userEmail = req.nextUrl.searchParams.get("email")
     const tasks = await Task.find({ user: userEmail }).sort({
       priority: 1,

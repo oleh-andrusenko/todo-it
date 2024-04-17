@@ -4,6 +4,7 @@ import bcrypt from "bcrypt"
 
 export async function POST(req) {
   try {
+    await connectToDb()
     const body = await req.json()
     const userData = body.user
     const findedUser = await User.findOne({ email: userData.email })
