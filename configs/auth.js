@@ -8,7 +8,7 @@ export const authConfig = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const response = await fetch("/api/Users/login", {
+        const response = await fetch("https://todo-it-eight.vercel.app/api/Users/login", {
           method: "POST",
           body: JSON.stringify(credentials),
           headers: {
