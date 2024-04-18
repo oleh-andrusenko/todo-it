@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import Image from "next/image"
-import { redirect, useRouter } from "next/navigation"
+import {  useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import { notify } from "@/libs/notify"
@@ -18,7 +18,8 @@ function AuthForm() {
   })
 
   const onSubmit = async (e) => {
-    signIn("credentials", {
+    e.preventDefault()
+    await signIn("credentials", {
       email: "strybizhwolf@gmail.com",
       password: "123321",
       redirect: false,
