@@ -1,13 +1,14 @@
-import Dashboard from "../components/Dashboard"
+import Home from "@/components/Home"
+
 export const metadata = {
   icons: {
-    icon: '/logo.svg', // /public path
+    icon: "/logo.svg", // /public path
   },
 }
-export default function Home() {
+export default function HomePage() {
   return (
-    <>
-      <Dashboard />
-    </>
+    <div className="grid place-content-center">
+      <Home />
+    </div>
   )
 }
