@@ -20,7 +20,7 @@ function AuthForm() {
   const onSubmit = async (e) => {
     e.preventDefault()
     const formData = new FormData(e.target)
-    
+
     const res = await signIn("credentials", {
       email: formData.get("email"),
       password: formData.get("password"),
@@ -28,9 +28,9 @@ function AuthForm() {
       callbackUrl: "/",
     })
 
+    router.push("/")
     if (res.ok) {
       notify(1, "Successfully logged in!")
-      router.replace("/")
     } else notify(2, "Something went wrong! Check credentials and try again!")
   }
 
