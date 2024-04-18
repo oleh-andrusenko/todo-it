@@ -18,17 +18,17 @@ function AuthForm() {
   })
 
   const onSubmit = async (data) => {
-    const res = await signIn("credentials", {
+    signIn("credentials", {
       email: data.email,
       password: data.password,
       redirect: false,
     })
-
-    if (res.ok) {
-      notify(1, "Successfully logged in!")
-      router.push("/")
-      redirect("/")
-    } else notify(2, "Something went wrong! Check credentials and try again!")
+    router.push("/")
+    // if (res.ok) {
+    //   notify(1, "Successfully logged in!")
+    //   router.push("/")
+    //   redirect("/")
+    // } else notify(2, "Something went wrong! Check credentials and try again!")
   }
 
   return (
