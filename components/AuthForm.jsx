@@ -30,7 +30,7 @@ function AuthForm() {
 
     if (res.ok) {
       notify(1, "Successfully logged in!")
-      router.push("/")
+      router.replace("/")
     } else notify(2, "Something went wrong! Check credentials and try again!")
   }
 
