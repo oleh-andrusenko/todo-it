@@ -11,8 +11,9 @@ export const authConfig = {
       },
       async authorize(credentials) {
         await connectToDb()
-        const user = User.findOne({email: credentials.email})
-
+        
+        const user = await User.findOne({email: credentials.email})
+        
         if(!user) return null
 
         const passwordsMatch = await bcrypt.compare(credentials.password, user.password)
