@@ -25,13 +25,13 @@ function AuthForm() {
       email: formData.get("email"),
       password: formData.get("password"),
       redirect: false,
-      callbackUrl: "/",
+      
     })
 
     router.push("/")
-    if (res.ok) {
-      notify(1, "Successfully logged in!")
-    } else notify(2, "Something went wrong! Check credentials and try again!")
+    // if (res.ok) {
+    //   notify(1, "Successfully logged in!")
+    // } else notify(2, "Something went wrong! Check credentials and try again!")
   }
 
   return (
