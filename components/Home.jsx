@@ -1,12 +1,17 @@
-import React from "react"
+"use client"
 import Image from "next/image"
 import Link from "next/link"
 import signin from "../assets/signin.svg"
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 function Home() {
+  const session = useSession()
+  const router = useRouter()
+  if (session.status === "loading") return <div className='loader'></div>
+  if (session.status === "authenticated") return router.push("/dashboard")
   return (
     <div className='w-[600px] h-[500px] flex flex-col justify-center items-center'>
       <div className='text-2xl font-semibold my-8'>
-        {" "}
         Welcome to our <span className='text-blue-700'>app</span>! Sign in to
         continue!
       </div>
