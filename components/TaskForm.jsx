@@ -1,16 +1,16 @@
 "use client"
-import { useRef, useState } from "react"
+import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
 import { notify } from "@/libs/notify"
 import { useForm } from "react-hook-form"
 import PriorityPicker from "./PriorityPicker"
 import ValidationError from "./ValidationError"
-import { FaCalendar } from "react-icons/fa";
+
 
 function TaskForm({ task }) {
   const [priority, setPriority] = useState(1)
-  const [date, setDate] = useState(new Date())
+  
   const router = useRouter()
   const session = useSession()
   const userEmail = session?.data?.user?.email

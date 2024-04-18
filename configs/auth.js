@@ -1,5 +1,7 @@
+import User from "@/(models)/User"
+import { connectToDb } from "@/libs/db"
 import Credentials from "next-auth/providers/credentials"
-
+import bcrypt from 'bcrypt'
 export const authConfig = {
   providers: [
     Credentials({
@@ -8,24 +10,26 @@ export const authConfig = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const response = await fetch("https://todo-it-eight.vercel.app/api/Users/login", {
-          method: "POST",
-          body: JSON.stringify(credentials),
-          headers: {
-            "Content-Type": "application-json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        })
-        if (response.ok) {
-          const { user } = await response.json()
-          return user
-        }
-        return null
+        await connectToDb()
+        const user = User.findOne({email: credentials.email})
+
+        if(!user) return null
+
+        const passwordsMatch = await bcrypt.compare(credentials.password, user.password)
+
+        if(!passwordsMatch) return null
+
+        return user
+
+
       },
     }),
   ],
+  session: {
+    strategy: 'jwt'
+  },
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/login",
-    signOut: "/",
   },
 }
