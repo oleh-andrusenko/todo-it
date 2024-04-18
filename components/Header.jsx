@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react"
 import ThemeSwitcher from "./ThemeSwitcher"
 function Header() {
   const session = useSession()
-  console.log(session)
+  
   return (
     <header className='h-16  flex items-center  justify-between shadow-lg sticky top-0 z-10 dark:bg-black dark:border-1 dark:border-b-[1px] dark:border-blue-700'>
       <Logo />

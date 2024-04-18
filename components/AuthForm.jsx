@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import Image from "next/image"
-import {  useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import { notify } from "@/libs/notify"
@@ -19,17 +19,19 @@ function AuthForm() {
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    await signIn("credentials", {
-      email: "strybizhwolf@gmail.com",
-      password: "123321",
+    const formData = new FormData(e.target)
+    
+    const res = await signIn("credentials", {
+      email: formData.get("email"),
+      password: formData.get("password"),
       redirect: false,
+      callbackUrl: "/",
     })
-    router.push("/")
-    // if (res.ok) {
-    //   notify(1, "Successfully logged in!")
-    //   router.push("/")
-    //   redirect("/")
-    // } else notify(2, "Something went wrong! Check credentials and try again!")
+
+    if (res.ok) {
+      notify(1, "Successfully logged in!")
+      router.push("/")
+    } else notify(2, "Something went wrong! Check credentials and try again!")
   }
 
   return (
@@ -44,7 +46,7 @@ function AuthForm() {
       </div>
 
       <div className='w-screen px-4 mt-8  md:p-4 md:mt-4 md:w-full'>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} id='authForm'>
           <div className='grid grid-rows-2 gap-2'>
             <div className='grid grid-rows-2 grid-cols-4 gap-1 input-field'>
               <input

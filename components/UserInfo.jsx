@@ -9,10 +9,10 @@ function UserInfo({ user }) {
       <HiMiniUserCircle className='w-6 h-6 md:w-10 md:h-10 text-blue-700' />
 
       <div>
-        <p className='text-[12px] font-semibold dark:text-white'>{`${
+        <p className='text-[12px] font-semibold dark:text-white truncate ...'>{`${
           user?.name && user.name
         }`}</p>
-        <p className='text-[10px] text-slate-700 dark:text-slate-200'>
+        <p className='text-[10px] text-slate-700 dark:text-slate-200 truncate ...'>
           {user?.email && user.email}
         </p>
       </div>
