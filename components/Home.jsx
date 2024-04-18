@@ -11,8 +11,8 @@ function Home() {
   if (session.status === "authenticated") return router.push("/dashboard")
   if (session.status === "unauthenticated")
     return (
-      <div className='w-[600px] h-[500px] flex flex-col justify-center items-center'>
-        <div className='text-2xl font-semibold my-8'>
+      <div className='w-full p-6 md:w-[600px] h-[500px] flex flex-col justify-center items-center'>
+        <div className='text-2xl font-semibold my-8 text-center dark:text-white'>
           Welcome to our <span className='text-blue-700'>app</span>! Sign in to
           continue!
         </div>

@@ -77,6 +77,7 @@ input {
 .loader {
   width: 100px;
   height: 40px;
+  margin: auto;
   --g: radial-gradient(
       farthest-side,
       rgb(29 78 216) calc(95% - 3px),
