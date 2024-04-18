@@ -17,10 +17,10 @@ function AuthForm() {
     mode: "onBlur",
   })
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (e) => {
     signIn("credentials", {
-      email: data.email,
-      password: data.password,
+      email: "strybizhwolf@gmail.com",
+      password: "123321",
       redirect: false,
     })
     router.push("/")
@@ -43,7 +43,7 @@ function AuthForm() {
       </div>
 
       <div className='w-screen px-4 mt-8  md:p-4 md:mt-4 md:w-full'>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={onSubmit}>
           <div className='grid grid-rows-2 gap-2'>
             <div className='grid grid-rows-2 grid-cols-4 gap-1 input-field'>
               <input
